@@ -16,22 +16,58 @@ var _ = { };
   // Return an array of the first n elements of an array. If n is undefined,
   // return just the first element.
   _.first = function(array, n) {
-  };
+    var sliced = array.slice(0, n);
+    if(n === undefined){
+      return array[0];
+    }
+    else {
+     return(sliced);
+    }
+  }
 
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function(array, n) {
+    var negative = (n * (-1));
+    var newArray = array.slice(negative);
+    if (n === undefined){
+      return array.slice(-1)[0];
+    }
+    else if (n === 0){
+      return [];
+    }
+    else {
+      return newArray;
+    }
   };
 
   // Call iterator(value, key, collection) for each element of collection.
   // Accepts both arrays and objects.
   _.each = function(collection, iterator) {
+
+    if(Array.isArray(collection)){
+      for(var i = 0; i < collection.length; i++){
+        iterator(collection[i], i, collection);
+      }
+    }
+    else {
+      for(var key in collection) {
+        iterator(collection[key], key, collection)
+      }
+    }
   };
 
   // Returns the index at which value can be found in the array, or -1 if value
   // is not present in the array.
-  _.indexOf = function(array, target){
-  };
+  // _.indexOf = function(array, target){
+  //    for(var i = 0; i < array.length; i++){
+  //      if (array[i] === target){
+  //        return i;
+  //      }
+  //   else {
+  //     return (-1);
+  //   }
+  // };
 
   // Return all elements of an array that pass a truth test ('iterator' function argument)
   _.filter = function(collection, iterator) {
@@ -54,6 +90,9 @@ var _ = { };
   // a certain property in it. E.g. take an array of people and return
   // an array of just their ages
   _.pluck = function(array, propertyName) {
+    for(var key in array) {
+      return array[key].propertyName;
+    }
   };
 
   // Calls the method named by methodName on each value in the list.
