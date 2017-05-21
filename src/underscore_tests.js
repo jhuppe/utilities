@@ -59,54 +59,106 @@ var _ = { };
 
   // Returns the index at which value can be found in the array, or -1 if value
   // is not present in the array.
-  // _.indexOf = function(array, target){
-  //    for(var i = 0; i < array.length; i++){
-  //      if (array[i] === target){
-  //        return i;
-  //      }
-  //   else {
-  //     return (-1);
-  //   }
-  // };
+  _.indexOf = function(array, target){
+     for(var i = 0; i < array.length; i++){
+       if (array[i] === target){
+         return i;
+       }
+
+    }
+    return -1;
+  };
 
   // Return all elements of an array that pass a truth test ('iterator' function argument)
   _.filter = function(collection, iterator) {
+    var newArray = [];
+    for(var i = 0; i < collection.length; i++) {
+      if (iterator(collection[i])) {
+        newArray.push(collection[i]);
+      }
+    }
+    return newArray;
   };
 
   // Return all elements of an array that don't pass a truth test (the 'iterator' function argument)
   _.reject = function(collection, iterator) {
+    var newArray = [];
+    for(var i = 0; i < collection.length; i++) {
+      if (!iterator(collection[i])) {
+        newArray.push(collection[i]);
+      }
+    }
+    return newArray;
   };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array) {
+    var newArray = [];
+    for(var i = 0; i < array.length; i++) {
+      if(newArray.indexOf(array[i]) === -1) {
+        newArray.push(array[i]);
+      } else {
+        console.log('This is a duplicate.')
+      }
+    }
+    return newArray;
   };
 
 
   // Return the results of applying an iterator to each element.
   _.map = function(array, iterator) {
+    var newArray = [];
+     for(var i = 0; i < array.length; i++){
+      var newValue = iterator(array[i])
+        newArray.push(newValue);
+     }
+     return newArray;
   };
 
   // Takes an array of objects and returns and array of the values of
   // a certain property in it. E.g. take an array of people and return
   // an array of just their ages
   _.pluck = function(array, propertyName) {
-    for(var key in array) {
-      return array[key].propertyName;
+    var newArray = [];
+    for(var i = 0; i < array.length; i++) {
+      newArray.push(array[i][propertyName]);
     }
+    return newArray;
   };
 
   // Calls the method named by methodName on each value in the list.
   _.invoke = function(list, methodName, args) {
+    var newArray = [];
+    for (var i = 0; i < list.length; i++){
+      if (typeof(methodName) === 'string') {
+        newArray.push(list[i][methodName]())
+      } else {
+        newArray.push(methodName.call(list[i]))
+      }
+    }
+    return newArray;
   };
 
   // Reduces an array or object to a single value by repetitively calling
   // iterator(previousValue, item) for each item. previousValue should be
   // the return value of the previous iterator call.
   _.reduce = function(collection, iterator, initialValue) {
+    var reduced = 0;
+    for (var i = 0; i < collection.length - 1; ++i) {
+      reduced = iterator(reduced, collection[i])
+    }
+    return reduced;
+
   };
 
   // Determine if the array or object contains a given value (using `===`).
   _.contains = function(collection, target) {
+    if(collection.indexOf(target)!== -1){
+      return true;
+    }
+    else {
+      return false;
+    }
   };
 
 
